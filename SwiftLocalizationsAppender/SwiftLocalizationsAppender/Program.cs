@@ -5,10 +5,17 @@ using Newtonsoft.Json;
 using System.Text;
 using SwiftLocalizationsAppender;
 
-var url = "https://script.google.com/macros/s/YourUrl/exec";
+var x = new List<Task>();
 for (int lang = 1; lang <= 25; lang++)
 {
-    for (int line = 129; line <= 130; line++)
+    x.Add(MakeAPICall(lang));
+}
+await Task.WhenAll(x);
+
+async Task MakeAPICall(int lang)
+{
+    var url = "https://script.google.com/macros/s/YourUrl/exec";
+    for (int line = 136; line <= 136; line++)
     {
         var data = new TranslationRequest() { Language = lang, Line = line };
         var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
@@ -19,14 +26,14 @@ for (int lang = 1; lang <= 25; lang++)
         try
         {
             translation = JsonConvert.DeserializeObject<TranslationResponse>(result);
-        } catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
             return;
         }
         if (translation == null)
             return;
-        string strPath = "/Users/YourPath/Localizations/" + translation.LanguageFile + "/Localizable.strings";
 
         StreamWriter writer = new StreamWriter(strPath, true);
         writer.WriteLine(translation.Line);
