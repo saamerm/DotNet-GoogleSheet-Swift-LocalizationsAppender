@@ -6,7 +6,8 @@ using System.Text;
 using SwiftLocalizationsAppender;
 
 var x = new List<Task>();
-for (int lang = 1; lang <= 25; lang++)
+var numberOfLanguages = 25;
+for (int lang = 1; lang <= numberOfLanguages; lang++)
 {
     x.Add(MakeAPICall(lang));
 }
@@ -15,7 +16,9 @@ await Task.WhenAll(x);
 async Task MakeAPICall(int lang)
 {
     var url = "https://script.google.com/macros/s/YourUrl/exec";
-    for (int line = 136; line <= 136; line++)
+    var firstRow = 137;
+    var lastRow = 137;
+    for (int line = firstRow; line <= lastRow; line++)
     {
         var data = new TranslationRequest() { Language = lang, Line = line };
         var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
@@ -34,8 +37,7 @@ async Task MakeAPICall(int lang)
         }
         if (translation == null)
             return;
-        //var directory =
-        string strPath = "/Users/YourPath/Localizations/" + translation.LanguageFile + "/Localizable.strings";
+        string strPath = "/Users/YourPath/BeAware/Localizations/" + translation.LanguageFile + "/Localizable.strings";
 
         StreamWriter writer = new StreamWriter(strPath, true);
         writer.WriteLine(translation.Line);
