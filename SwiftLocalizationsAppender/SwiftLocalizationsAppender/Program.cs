@@ -34,6 +34,8 @@ async Task MakeAPICall(int lang)
         }
         if (translation == null)
             return;
+        //var directory =
+        string strPath = "/Users/YourPath/Localizations/" + translation.LanguageFile + "/Localizable.strings";
 
         StreamWriter writer = new StreamWriter(strPath, true);
         writer.WriteLine(translation.Line);
