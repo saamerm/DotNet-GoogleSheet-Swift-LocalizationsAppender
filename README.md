@@ -38,3 +38,7 @@ Voilà! You should see the required translations show up correctly in the right 
 
 ![Screenshot 1](Screenshots/Image1.png)
 ![Screenshot 2](Screenshots/Image2.png)
+
+### Updates
+
+* Added the ability to update the InfoPlist.strings files as well using the MakeCFBundleNameAPICall and MakeCFBundleDisplayNameAPICall functions. You have to update google sheet to show CFBundleName and CFBundleDisplayName on the left and just run one function after the other
