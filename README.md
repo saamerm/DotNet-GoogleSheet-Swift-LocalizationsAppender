@@ -29,7 +29,7 @@ As you can see in the [translations Google Spreadsheet](https://docs.google.com/
 
 - Open the console application in Visual Studio, or else if you don't want to install VS for Mac, you can [install Dotnet 7 from here](https://dotnet.microsoft.com/en-us/download)
 - Restoring nuget packages happens automatically on Visual Studio. If running through the terminal, run `dotnet restore`
-- Update lines 9, 18, 40 of the [Program.cs file](SwiftLocalizationsAppender/SwiftLocalizationsAppender/Program.cs) with your requirements 
+- Update lines 9, 18, 40 of the [Program.cs file](SwiftLocalicd zationsAppender/SwiftLocalizationsAppender/Program.cs) with your requirements 
 - Then every time you have to add translation, just update lines 19 & 20, & hit play if using Visual Studio or execute `dotnet run` on VS Code
 
 Voilà! You should see the required translations show up correctly in the right Localizable.strings file
@@ -41,4 +41,5 @@ Voilà! You should see the required translations show up correctly in the right 
 
 ### Updates
 
-* Added the ability to update the InfoPlist.strings files as well using the MakeCFBundleNameAPICall and MakeCFBundleDisplayNameAPICall functions. You have to update google sheet to show CFBundleName and CFBundleDisplayName on the left and just run one function after the other
+* Added the ability to update the InfoPlist.strings files as well using the MakeInfoPlistChangeStep1 and MakeInfoPlistChangeStep2 functions. You have to update google sheet to show CFBundleName and CFBundleDisplayName on the left and just run one function after the other
+In the Google Sheet, the English value needs to be manually input into the Do Not Edit file

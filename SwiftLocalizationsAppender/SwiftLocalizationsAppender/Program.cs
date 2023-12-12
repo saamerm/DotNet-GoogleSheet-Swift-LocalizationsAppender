@@ -13,7 +13,8 @@ var numberOfLanguages = 25;
 for (int lang = 1; lang <= numberOfLanguages; lang++)
 {
     // x.Add(MakeAPICall(lang));
-    x.Add(MakeCFBundleNameAPICall(lang));
+    x.Add(MakeInfoPlistChangeStep2(lang));
+    // x.Add(MakeCFBundleDisplayNameAPICall(lang));
 }
 await Task.WhenAll(x);
 
@@ -57,11 +58,11 @@ async Task MakeAPICall(int lang)
     }
 }
 
-async Task MakeCFBundleNameAPICall(int lang)
+async Task MakeInfoPlistChangeStep1(int lang)
 {
     var url = googleUrl;
-    var firstRow = 169;
-    var lastRow = 169;
+    var firstRow = 171;
+    var lastRow = 171;
     for (int line = firstRow; line <= lastRow; line++)
     {
         var data = new TranslationRequest() { Language = lang, Line = line };
@@ -92,12 +93,11 @@ async Task MakeCFBundleNameAPICall(int lang)
     }
 }
 
-
-async Task MakeCFBundleDisplayNameAPICall(int lang)
+async Task MakeInfoPlistChangeStep2(int lang)
 {
     var url = googleUrl;
-    var firstRow = 170;
-    var lastRow = 170;
+    var firstRow = 172;
+    var lastRow = 172;
     for (int line = firstRow; line <= lastRow; line++)
     {
         var data = new TranslationRequest() { Language = lang, Line = line };
@@ -118,8 +118,9 @@ async Task MakeCFBundleDisplayNameAPICall(int lang)
         if (translation == null)
             return;
         string strPath = filePath + translation.LanguageFile + "/InfoPlist.strings";
-        var linesToKeep = File.ReadLines(strPath).Where(l => !l.Contains("CFBundleDisplayName"));
-        File.WriteAllLines(strPath, linesToKeep);
+        var linesToKeep = File.ReadLines(strPath).ToList();
+        linesToKeep.RemoveAt(2);
+        File.WriteAllLines(strPath, linesToKeep.ToArray());
         StreamWriter writer = new StreamWriter(strPath, true);
         writer.WriteLine(translation.Line);
         writer.Flush();
