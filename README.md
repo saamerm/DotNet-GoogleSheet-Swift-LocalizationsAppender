@@ -8,7 +8,7 @@ Since I have a [free app for the Deaf and Hard of Hearing called BeAware](https:
  app, I created a #JavaScript AppScript API, that pulls =GOOGLETRANSLATE translations from Google Sheets. Then a #Csharp console app gets values & writes to #Swift App Code localizations files!
 
 
-## Steps to use this : 
+## Steps to set this up: 
 
 1. Google Sheet with translations:
 
@@ -33,6 +33,26 @@ As you can see in the [translations Google Spreadsheet](https://docs.google.com/
 - Then every time you have to add translation, just update lines 19 & 20, & hit play if using Visual Studio or execute `dotnet run` on VS Code
 
 Voilà! You should see the required translations show up correctly in the right Localizable.strings file
+
+## Steps to use this: 
+
+1. Add the English Copy of the translation
+
+- Go to the [translations Google Spreadsheet](https://docs.google.com/spreadsheets/d/1ocn1WHA4--EabfJ2eEZwZjz4orCIKo18rawDiJCZVYs/edit#gid=1560650986), to the `RawData-DontEdit` sheet and go to the row above the cell that says "ABOVE THIS." 
+- Add the English text you need to be translated into Column B of that row. If you don't have permissions to make changes to the file, ask [Saamer mansoor](mailto:i@saamer.me) for access 
+- Optionally add a descripition in Column A, 
+- The translation will be auto generated, if not copy and paste the formula from the cell above it
+
+2. Generating the right format
+- Go to the `Need Help Here` sheet and go to the row above the cell that says "ABOVE THIS.", then paste the entire row with only values, using Edit->Paste special->Values only. If you need some one to verify the translation is correct/verify translation, this is where they would make changes
+- Once all the translations are validated, then go to the `CodeConverter-DontEdit` sheet. Make sure all the rows have new values now and are populate, if not copy and paste the formula from the cell above it. Note down the first and last row numbers of the new translations
+
+3. Adding all the translation automatically
+- Clone this GitHub repo if you haven't already.
+- Make sure you have [https://dotnet.microsoft.com/en-us/](dotnet) installed, and that you can access it from your terminal
+- You can get the filePath & googleUrl from Saamer Mansoor
+- Then line 24 & 25 should contain the first and last row numbers from the step above in 2.
+- Save all and view your changes in your Git client before committing
 
 ### Screenshots
 
