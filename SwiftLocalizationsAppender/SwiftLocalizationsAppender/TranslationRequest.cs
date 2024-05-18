@@ -5,6 +5,7 @@ namespace SwiftLocalizationsAppender
 	{
 		public int Line { get; set; }
 		public int Language { get; set; }
+		public string Platform { get; set; }
     }
 }
 

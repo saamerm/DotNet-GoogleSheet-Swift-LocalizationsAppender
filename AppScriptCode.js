@@ -11,12 +11,25 @@ function processResult(resultObject)
   // Open Google Sheet using ID
   // https://developers.google.com/sheets/api/guides/concepts Spreadsheet -> Sheet -> Cell
   var spreadSheet = SpreadsheetApp.openById("YOUR ID");
-  var sheet = spreadSheet.getSheetByName("CodeConverter-DontEdit")
+  var sheet;
+  if (resultObject.Platform == "Android"){
+    sheet = spreadSheet.getSheetByName("AndroidCodeConverter-DontEdit")
+  } else{
+    sheet = spreadSheet.getSheetByName("CodeConverter-DontEdit")
+  }
+  
   var result = {"LanguageFile": "FAILED", "Line": "Unknown Failure"};
   try{
     // Get a cell value from a sheet
     var rowData = sheet.getRange(resultObject.Line,resultObject.Language).getValue() 
-    var fileName = sheet.getRange(2,resultObject.Language).getValue() 
+    var fileName = "";
+    if (resultObject.Platform == "Android"){
+      fileName = sheet.getRange(8,resultObject.Language).getValue() 
+    } else{
+      fileName = sheet.getRange(2,resultObject.Language).getValue() 
+    }
+
+    
     result = {"LanguageFile": fileName, "Line": rowData};
   }catch(exc){
     // If error occurs, throw exception
@@ -37,4 +50,4 @@ function test(){
   console.log(result)
 }
 
-// https://script.google.com/macros/s/YourUrl/exec
+// https://script.google.com/macros/s/AKfycbxPJWHbUPFfZjXSvKMaGEujGP5IP-IulfC-WIsOc5JCjGUCX37GgkFPqvIUvW0Y4H2HGw/exec
